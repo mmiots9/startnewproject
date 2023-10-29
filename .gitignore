@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+
+# System
+.DS_Store
+
+# Pip
+*.egg-info
+dist/
