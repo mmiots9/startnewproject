@@ -1,21 +1,37 @@
 {
-    "description": "dgeneral", 
+    "description": "This is the README of the entire project. Here you can find information about folder structure, files and project details.", 
     "subfolders": {
-        "analysis": {
-            "description": "panalysis",
+        "analyses": {
+            "description": "This folder contains folders and files of the analyses.",
             "subfolders": {},
             "files": []
         },
         "data": {
-            "description": "ddata",
+            "description": "This folder contains raw data of the project.",
             "subfolders": {},
             "files": []
         },
+        "output": {
+            "description": "This folder contains the different iutputs of the analyses.",
+            "subfolders": {
+                "tables": {
+                    "description": "This folder contains tabular results of the analyses.",
+                    "subfolders": {},
+                    "files": []
+                },
+                "plots": {
+                    "description": "This folder contains plots of the results of the analyses.",
+                    "subfolders": {},
+                    "files": []
+                }
+            },
+            "files": []
+        },
         "script": {
-            "description": "dscrit",
+            "description": "This folder contains scripts that are used in the analyses.",
             "subfolders": {
                 "functions": {
-                    "description": "dfunctions",
+                    "description": "This fodler contains script of functions that are used in the analyses.",
                     "subfolders": {},
                     "files": []
                 }
@@ -23,15 +39,15 @@
             "files": []
         },
         "refs": {
-            "description": "drefs",
+            "description": "This folder contains different references for the projects.",
             "subfolders": {
                 "papers": {
-                    "description": "dpapers",
+                    "description": "This folder contains papers that are useful for this project.",
                     "subfolders": {},
                     "files": []
                 },
                 "colors": {
-                    "description": "dcolors",
+                    "description": "This folder contains .csv files that are used for color code for the figures of this project.",
                     "subfolders": {},
                     "files": []
                 }
