@@ -38,6 +38,6 @@ setup(
     python_requires='>=3.7',
     install_requires=[
         "argparse",
-        "pylabnotebook>=0.1.4"
+        "pylabnotebook>=0.1.8"
     ],
 )
