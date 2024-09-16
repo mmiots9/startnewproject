@@ -6,4 +6,7 @@ __pycache__/
 
 # Pip
 *.egg-info
+dist/.pdm-python
+.pdm-python
 dist/
+docs/build
