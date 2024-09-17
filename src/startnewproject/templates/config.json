@@ -27,17 +27,6 @@
             },
             "files": []
         },
-        "script": {
-            "description": "This folder contains scripts that are used in the analyses.",
-            "subfolders": {
-                "functions": {
-                    "description": "This fodler contains script of functions that are used in the analyses.",
-                    "subfolders": {},
-                    "files": []
-                }
-            },
-            "files": []
-        },
         "refs": {
             "description": "This folder contains different references for the projects.",
             "subfolders": {
@@ -53,11 +42,23 @@
                 }
             },
             "files": []
+        },
+        "script": {
+            "description": "This folder contains scripts that are used in the analyses.",
+            "subfolders": {
+                "functions": {
+                    "description": "This folder contains script of functions that are used in the analyses.",
+                    "subfolders": {},
+                    "files": []
+                }
+            },
+            "files": []
         }
+        
     },
     "files": [],
     ".gitignore": ["*.DS_Store", "__pycache__/", "*.pyc"],
     ".gitattributes": {
-        "binary": ["*png", "*jpg", "*jpeg", "*gif", "*tiff", "*tif", "*bmp", "*ico", "svg", "pdf"]
+        "binary": ["*png", "*jpg", "*jpeg", "*gif", "*tiff", "*tif", "*bmp", "*ico", "*svg", "*pdf"]
     }
 }
