@@ -11,4 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed typos in config template.
 
-[0.1.6]: https://github.com/mmiots9/pylabnotebook/compare/v0.1.5...0.1.6
+[0.1.6]: https://github.com/mmiots9/startnewproject/compare/v0.1.5...0.1.6
