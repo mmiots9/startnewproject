@@ -1,5 +1,5 @@
 setuptools>=72.1.0
 argparse>=1.4.0
-pylabnotebook>=0.2.1
+pylabnotebook>=0.3.1
 sphinx-rtd-theme>=2.0.0
 myst-parser>=4.0.0

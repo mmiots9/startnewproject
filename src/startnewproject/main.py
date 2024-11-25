@@ -305,11 +305,10 @@ def main() -> None:
     _ = subprocess.run("git commit -m 'Initial commit'", shell=True, check=False)
 
     # Create labnotebook
-    _ = subprocess.run(f"labnotebook create -n '{args.name}'", shell=True, check=False)
+    _ = subprocess.run(f"labnotebook init -n '{args.name}'", shell=True, check=False)
     if args.readme_template == "html":
         with open(".labignore", "w", encoding="utf-8") as labignore_file:
             labignore_file.write("*README.html\n")
-    _ = subprocess.run("labnotebook update", shell=True, check=False)
     _ = subprocess.run(f"labnotebook export -o {folder_name}_notebook.html", shell=True,
                        check=False)
 
