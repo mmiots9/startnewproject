@@ -15,7 +15,7 @@ import startnewproject
 project = 'startnewproject'
 copyright = '2024, Matteo Miotto'
 author = 'Matteo Miotto'
-release = '0.1.6'
+release = '0.1.7'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
