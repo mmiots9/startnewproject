@@ -9,6 +9,7 @@ import subprocess
 import json
 import shutil
 import sys
+from jinja2 import Environment, FileSystemLoader
 from .version import __version__
 
 def create_gitignore(config: dict) -> None:
@@ -68,15 +69,16 @@ def create_folder(folder_dict: dict, name: str, readme_template: str) -> None:
 
     # Create README
     script_dir: str = os.path.dirname(os.path.abspath(__file__))
-    if readme_template == "txt":
-        readme_template_file: str = os.path.join(script_dir, 'templates', 'README.txt')
-        create_txt_readme(folder_dict, name, readme_template_file)
-    elif readme_template == "md":
-        readme_template_file: str = os.path.join(script_dir, 'templates', 'README.md')
-        create_md_readme(folder_dict, name, readme_template_file)
-    elif readme_template == "html":
-        readme_template_file: str = os.path.join(script_dir, 'templates', 'README.html')
-        create_html_readme(folder_dict, name, readme_template_file)
+    environment = Environment(loader=FileSystemLoader(f"{script_dir}/templates/"))
+    template = environment.get_template(f"README.{readme_template}")
+    today = datetime.today().strftime("%Y-%m-%d")
+    content = template.render(name = name,
+                              creation_date = today,
+                              updated_date = today,
+                              folder_dict = folder_dict)
+
+    with open(f"README.{readme_template}", mode="w", encoding="utf-8") as readme:
+        readme.write(content)
 
     # Create subfolders
     for folder_name, dictionary in folder_dict.get("subfolders", {}).items():
@@ -85,164 +87,6 @@ def create_folder(folder_dict: dict, name: str, readme_template: str) -> None:
         os.chdir(folder_name)
         create_folder(dictionary, folder_name, readme_template)
         os.chdir(old_path)
-
-
-def create_txt_readme(folder_dict: dict, name: str, readme_template: str) -> None:
-    """Create txt README file.
-
-    This function creates a README.txt file in the current working directory.
-
-
-    :param folder_dict: config dictionary with folder structure.
-    :type folder_dict: dict
-    :param name: name of the actual folder, as header of the README.
-    :type name: str
-    :param readme_template: path to the README template.
-    :type readme_template: str
-    """
-
-    # Read template file
-    with open(readme_template, "r", encoding="utf-8") as template_file:
-        template_content: str = template_file.read()
-
-    # Replace name
-    template_content: str = template_content.replace("<name>", name.upper())
-
-    # Replace dates
-    today: str = datetime.now().strftime('%Y-%m-%d')
-    template_content: str = template_content.replace("<creation_date>", today)
-    template_content: str = template_content.replace("<updated_date>", today)
-
-    # Replace description
-    template_content: str = template_content.replace("<description>",
-                                                     folder_dict.get("description", ""))
-
-    # Replace folders
-    if folder_dict.get("subfolders", {}):
-        folders_content: str = ""
-        for subfolder_name, dictionary in folder_dict.get("subfolders", {}).items():
-            folders_content += f'- {subfolder_name}: {dictionary.get("description", "")}\n'
-        template_content: str = template_content.replace("<folders>", folders_content)
-    else:
-        template_content: str = template_content.replace("<folders>", "")
-
-    # Replace files
-    if folder_dict.get("files", []):
-        files_content: str = ""
-        for file in folder_dict.get("files", []):
-            files_content += f'- {file}\n' # pylint: disable=consider-using-join
-        template_content: str = template_content.replace("<files>", files_content)
-    else:
-        template_content: str = template_content.replace("<files>", "")
-
-    # Write README file
-    with open("README.txt", "w", encoding="utf-8") as readme_file:
-        readme_file.write(template_content)
-
-
-def create_md_readme(folder_dict: dict, name: str, readme_template: str) -> None:
-    """Create md README file.
-
-    This function creates a README.md file in the current working directory.
-
-
-    :param folder_dict: config dictionary with folder structure.
-    :type folder_dict: dict
-    :param name: name of the actual folder, as header of the README.
-    :type name: str
-    :param readme_template: path to the README template.
-    :type readme_template: str
-    """
-
-    # Read template file
-    with open(readme_template, "r", encoding="utf-8") as template_file:
-        template_content: str = template_file.read()
-
-    # Replace name
-    template_content: str = template_content.replace("<name>", name.upper())
-
-    # Replace dates
-    today: str = datetime.now().strftime('%Y-%m-%d')
-    template_content: str = template_content.replace("<creation_date>", today)
-    template_content: str = template_content.replace("<updated_date>", today)
-
-    # Replace description
-    template_content: str = template_content.replace("<description>",
-                                                     folder_dict.get("description", ""))
-
-    # Replace folders
-    if folder_dict.get("subfolders", {}):
-        folders_content: str = ""
-        for subfolder_name, dictionary in folder_dict.get("subfolders", {}).items():
-            folders_content += f'* {subfolder_name}: {dictionary.get("description", "")}\n'
-        template_content = template_content.replace("<folders>", folders_content)
-    else:
-        template_content: str = template_content.replace("<folders>", "")
-
-    # Replace files
-    if folder_dict.get("files", []):
-        files_content: str = ""
-        for file in folder_dict.get("files", []):
-            files_content += f'* {file}\n'
-        template_content: str = template_content.replace("<files>", files_content)
-    else:
-        template_content: str = template_content.replace("<files>", "")
-
-    # Write README file
-    with open("README.md", "w", encoding="utf-8") as readme_file:
-        readme_file.write(template_content)
-
-def create_html_readme(folder_dict: dict, name: str, readme_template: str) -> None:
-    """Create html README file.
-
-    This function creates a README.html file in the current working directory.
-
-
-    :param folder_dict: config dictionary with folder structure.
-    :type folder_dict: dict
-    :param name: name of the actual folder, as header of the README.
-    :type name: str
-    :param readme_template: path to the README template.
-    :type readme_template: str
-    """
-
-    # Read template file
-    with open(readme_template, "r", encoding="utf-8") as template_file:
-        template_content: str = template_file.read()
-
-    # Replace name
-    template_content: str = template_content.replace("<name>", name.upper())
-
-    # Replace dates
-    today: str = datetime.now().strftime('%Y-%m-%d')
-    template_content: str = template_content.replace("<creation_date>", today)
-    template_content: str = template_content.replace("<updated_date>", today)
-
-    # Replace description
-    template_content: str = template_content.replace("<description>",
-                                                     folder_dict.get("description", ""))
-
-    # Replace folders
-    if folder_dict.get("subfolders", {}):
-        folders_content: str = ""
-        for subfolder_name, dictionary in folder_dict.get("subfolders", {}).items():
-            folders_content += f'<li>{subfolder_name}: {dictionary.get("description", "")}</li>\n'
-        template_content: str = template_content.replace("<folders>", folders_content)
-    else:
-        template_content: str = template_content.replace("<folders>", "")
-
-    # Replace files
-    if folder_dict.get("files", []):
-        files_content: str = ""
-        for file in folder_dict.get("files", []):
-            files_content += f'<li>{file}</li>\n'
-        template_content: str = template_content.replace("<files>", files_content)
-    else:
-        template_content: str = template_content.replace("<files>", "")
-
-    # Write README file
-    with open("README.html", "w", encoding="utf-8") as readme_file:
-        readme_file.write(template_content)
 
 def main() -> None:
     """Main cli function handler.
