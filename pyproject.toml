@@ -1,6 +1,6 @@
 [project]
 name = "startnewproject"
-version = "0.1.7"
+version = "0.1.8"
 description = "This package provides a command to create a new project folder with subfolders, READMEs, pylabnotebook and git."
 authors = [
     {name = "Matteo Miotto", email = "miotsdata@gmail.com"},
@@ -11,6 +11,7 @@ dependencies = [
     "pylabnotebook>=0.3.1",
     "sphinx-rtd-theme>=2.0.0",
     "myst-parser>=4.0.0",
+    "Jinja2>=3.1.4",
 ]
 requires-python = ">=3.7"
 readme = "README.md"

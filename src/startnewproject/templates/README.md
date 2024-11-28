@@ -1,14 +1,24 @@
-# <name> README
+# {{ name }} README
 
-Created on: <creation_date>
-Updated on: <updated_date>
+Created on: {{ creation_date }}
+Updated on: {{ updated_date }}
 
-<description>
+{{ folder_dict.get("description") }}
 
 ## Folders
 
-<folders>
+{% if folder_dict.get("subfolders", {}) -%}
+{% for subfolder_name, dictionary in folder_dict.get("subfolders").items() -%}
+
+- {{ subfolder_name }}: {{ dictionary.get("description", "") }}
+{% endfor %}
+{%- endif %}
 
 ## Files
 
-<files>
+{% if folder_dict.get("files", []) -%}
+{% for file in folder_dict.get("files") -%}
+
+- {{ file }}
+{% endfor %}
+{%- endif %}
