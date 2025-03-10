@@ -1,4 +1,4 @@
-# {{ name }} README
+# {{ name.upper() }} README
 
 Created on: {{ creation_date }}
 Updated on: {{ updated_date }}
