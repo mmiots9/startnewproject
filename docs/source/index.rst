@@ -7,13 +7,13 @@ For reporting bugs or other issues with startnewproject please use: https://gith
 
 For any other questions please contact us via miotsdata@gmail.com.
 
-What's new in version 0.1.6
+What's new in version 0.1.9
 ------------------------------------
 
 Fixed
 ^^^^^^^^^
 
-- Fixed typos in config template.
+- Fixed readme title to uppercase.
 
 .. toctree::
    :caption: Tool Guide:

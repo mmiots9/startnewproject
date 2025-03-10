@@ -1,6 +1,6 @@
 [project]
 name = "startnewproject"
-version = "0.1.8"
+version = "0.1.9"
 description = "This package provides a command to create a new project folder with subfolders, READMEs, pylabnotebook and git."
 authors = [
     {name = "Matteo Miotto", email = "miotsdata@gmail.com"},
